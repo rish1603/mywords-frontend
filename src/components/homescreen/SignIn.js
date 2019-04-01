@@ -10,7 +10,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {Route, Redirect} from 'react-router-dom'
+import {Route, Redirect, withRouter} from 'react-router-dom'
 import SearchScreen from '../SearchScreen'
 
 const styles = theme => ({
@@ -50,7 +50,6 @@ class SignIn extends React.Component {
         this.state = {
             username: '',
             password: '',
-            fireRedirect: false
 
         }
         this.handleChange = this.handleChange.bind(this);
@@ -77,7 +76,7 @@ class SignIn extends React.Component {
         }).then((result) => result.json())
             .then((info) => {
                 console.log(info.token);
-                this.setState({ fireRedirect: true })
+                console.log(this.props)
                 this.props.history.push("/something");
             })
     }
@@ -85,7 +84,6 @@ class SignIn extends React.Component {
     render() {
 
         const { from } = this.props.location.state || '/'
-        const { fireRedirect } = this.state
         const { classes } = this.props;
         return (
         <main className={classes.main}>
@@ -127,4 +125,4 @@ SignIn.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SignIn);
+export default withRouter(withStyles(styles)(SignIn))
