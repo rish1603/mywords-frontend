@@ -79,7 +79,7 @@ class Register extends React.Component {
                         onChange={this.handleChange} autoFocus/>
                     </FormControl>
                     <FormControl margin="normal" required fullWidth>
-                        <InputLabel hutmlFor="Username">Username</InputLabel>
+                        <InputLabel htmlFor="Username">Username</InputLabel>
                         <Input id="username" name="userName" onChange={this.handleChange}/>
                     </FormControl>
                     <FormControl margin="normal" required fullWidth>

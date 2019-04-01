@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { Switch, Route, Link, BrowserRouter, Redirect } from "react-router-dom";
-import SignIn from './SignIn'
+import Tabs from '@material-ui/core/Tabs';
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
+import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 import Register from './Register';
+import SignIn from './SignIn';
 
 const styles = {
   root: {
@@ -13,7 +13,7 @@ const styles = {
   },
 };
 
-class CenteredTabs extends React.Component {
+class HomeScreen extends React.Component {
   state = {
     value: 0,
   };
@@ -42,8 +42,8 @@ class CenteredTabs extends React.Component {
                 </Tabs>
                 <Switch>
                   {/* <Route path="/register" render={() => <div>Register form</div>} /> */}
-                  <Route path="/register" component ={Register} />
-                  <Route path="/" component={SignIn} />
+                  <Route path="/register" component ={Register}/>
+                  <Route path="/" component={SignIn}/>
                 </Switch>
               </Fragment>
             )}
@@ -54,8 +54,12 @@ class CenteredTabs extends React.Component {
   }
 }
 
-CenteredTabs.propTypes = {
+function Something() {
+  return <h2>Something</h2>;
+}
+
+HomeScreen.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CenteredTabs);
+export default withStyles(styles)(HomeScreen);

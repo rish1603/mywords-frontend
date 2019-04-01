@@ -10,6 +10,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import {Route, Redirect} from 'react-router-dom'
+import SearchScreen from '../SearchScreen'
 
 const styles = theme => ({
     main: {
@@ -46,20 +48,44 @@ class SignIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: '',
+            username: '',
             password: '',
+            fireRedirect: false
+
         }
         this.handleChange = this.handleChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     handleChange(event) {
-
             this.setState({ [event.target.name]: event.target.value });
     }
 
+    onSubmit(event) {
+        event.preventDefault()
+
+        // TODO: handle unauthorized error  
+        fetch('http://localhost:8080/login', {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify( {
+                username: this.state.username,
+                password: this.state.password
+            })
+        }).then((result) => result.json())
+            .then((info) => {
+                console.log(info.token);
+                this.setState({ fireRedirect: true })
+                this.props.history.push("/something");
+            })
+    }
 
     render() {
 
+        const { from } = this.props.location.state || '/'
+        const { fireRedirect } = this.state
         const { classes } = this.props;
         return (
         <main className={classes.main}>
@@ -71,15 +97,15 @@ class SignIn extends React.Component {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <form className={classes.form}>
+                <form className={classes.form} onSubmit={this.onSubmit}>
                     <FormControl margin="normal" required fullWidth>
-                        <InputLabel hutmlFor="Username">Username</InputLabel>
-                        <Input id="username" name="userName" onChange={this.handleChange} autoFocus />
+                        <InputLabel htmlFor="Username">Username</InputLabel>
+                        <Input id="username" name="username" onChange={this.handleChange} autoFocus />
                     </FormControl>
                     <FormControl margin="normal" required fullWidth>
                         <InputLabel htmlFor="password">Password</InputLabel>
                         <Input name="password" type="password" id="password" 
-                        name = "ppssword" onChange={this.handleChange} autoComplete="current-password" />
+                        name = "password" onChange={this.handleChange} autoComplete="current-password" />
                     </FormControl>
                     <Button 
                         type="submit"

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Homescreen from './components/homescreen/Homescreen'
+import Homescreen from './components/homescreen/HomeScreen'
 import './App.css';
 
 class App extends Component {
@@ -11,5 +11,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;
