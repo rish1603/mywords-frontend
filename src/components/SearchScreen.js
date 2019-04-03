@@ -1,9 +1,11 @@
 import React from 'react';
+import SearchField from './searchscreen/SearchField';
 
 class SearchScreen extends React.Component {
   render() {
     return (
-    <h1>Hello</h1>);
+      <SearchField/>
+    )
   }
   componentDidMount() {
     console.log("Component Mounted")

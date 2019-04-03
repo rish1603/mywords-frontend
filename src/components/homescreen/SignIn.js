@@ -10,8 +10,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {Route, Redirect, withRouter} from 'react-router-dom'
-import SearchScreen from '../SearchScreen'
+import { Route, Redirect, withRouter } from 'react-router-dom'
+import MyTabs from './MyTabs';
 
 const styles = theme => ({
     main: {
@@ -56,19 +56,19 @@ class SignIn extends React.Component {
     }
 
     handleChange(event) {
-            this.setState({ [event.target.name]: event.target.value });
+        this.setState({ [event.target.name]: event.target.value });
     }
 
     onSubmit(event) {
         event.preventDefault()
 
-        // TODO: handle unauthorized error  
+        // TODO: handle unauthorized error  and add token support
         fetch('http://localhost:8080/login', {
             method: "POST",
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify( {
+            body: JSON.stringify({
                 username: this.state.username,
                 password: this.state.password
             })
@@ -83,37 +83,38 @@ class SignIn extends React.Component {
 
         const { classes } = this.props;
         return (
-        <main className={classes.main}>
-            <CssBaseline />
-            <Paper className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign in
-                </Typography>
-                <form className={classes.form} onSubmit={this.onSubmit}>
-                    <FormControl margin="normal" required fullWidth>
-                        <InputLabel htmlFor="Username">Username</InputLabel>
-                        <Input id="username" name="username" onChange={this.handleChange} autoFocus />
-                    </FormControl>
-                    <FormControl margin="normal" required fullWidth>
-                        <InputLabel htmlFor="password">Password</InputLabel>
-                        <Input name="password" type="password" id="password" 
-                        name = "password" onChange={this.handleChange} autoComplete="current-password" />
-                    </FormControl>
-                    <Button 
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
+            <main className={classes.main}>
+                <MyTabs selectedTab='/'/>
+                <CssBaseline />
+                <Paper className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
                         Sign in
+                </Typography>
+                    <form className={classes.form} onSubmit={this.onSubmit}>
+                        <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="Username">Username</InputLabel>
+                            <Input id="username" name="username" onChange={this.handleChange} autoFocus />
+                        </FormControl>
+                        <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="password">Password</InputLabel>
+                            <Input name="password" type="password" id="password"
+                                name="password" onChange={this.handleChange} autoComplete="current-password" />
+                        </FormControl>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Sign in
                     </Button>
-                </form>
-            </Paper>
-        </main>
+                    </form>
+                </Paper>
+            </main>
         )
     }
 }
@@ -122,4 +123,4 @@ SignIn.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
- export default withStyles(styles)(withRouter(SignIn));
+export default withStyles(styles)(withRouter(SignIn));

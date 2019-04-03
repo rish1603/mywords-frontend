@@ -3,10 +3,11 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import { BrowserRouter, Link, Route, Switch, withRouter, Redirect, ProtectedRoute } from "react-router-dom";
+import { BrowserRouter, Link, Route, Router, Switch, withRouter, Redirect, ProtectedRoute } from "react-router-dom";
 import Register from './Register';
 import SignIn from './SignIn';
 import SearchScreen from '../SearchScreen';
+import MyTabs from './MyTabs';
 
 const styles = {
   root: {
@@ -28,22 +29,11 @@ class HomeScreen extends React.Component {
     return (
       <BrowserRouter>
         <div className="HomeScreen">
-          <Fragment>
-            <Tabs
-              value={'/'}
-              indicatorColor="primary"
-              textColor="primary"
-              centered
-            >
-              <Tab label="Sign In" value="/" component={Link} to="/"/>
-              <Tab label="Register" value="/register" component={Link} to="/register"/>
-            </Tabs>
             <Switch>
-              <Route path="/register" component={Register}/>
-              <Route path="/" component={SignIn} />
+              <Route exact path="/register" component={Register}/>
+              <Route exact path="/" component={SignIn} />
+              <Route exact path="/search" component={SearchScreen}/>
             </Switch>
-          </Fragment>
-          <Route path="/search" component={SearchScreen}/>
         </div>
       </BrowserRouter>
     );

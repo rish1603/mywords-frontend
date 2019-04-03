@@ -166,7 +166,7 @@ class SearchField extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              Material-UI
+              MyWords
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
