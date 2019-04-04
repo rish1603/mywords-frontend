@@ -1,10 +1,10 @@
 import React from 'react';
-import SearchField from './searchscreen/SearchField';
+import SearchAppBar from './searchscreen/SearchAppBar';
 
 class SearchScreen extends React.Component {
   render() {
     return (
-      <SearchField/>
+      <SearchAppBar/>
     )
   }
   componentDidMount() {

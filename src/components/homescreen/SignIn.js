@@ -66,7 +66,8 @@ class SignIn extends React.Component {
         fetch('http://localhost:8080/login', {
             method: "POST",
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                'Authorization': 'Bearer' + authToken
             },
             body: JSON.stringify({
                 username: this.state.username,
