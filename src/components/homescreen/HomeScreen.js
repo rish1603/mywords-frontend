@@ -6,7 +6,7 @@ import React, { Fragment } from 'react';
 import { BrowserRouter, Link, Route, Router, Switch, withRouter, Redirect, ProtectedRoute } from "react-router-dom";
 import Register from './Register';
 import SignIn from './SignIn';
-import SearchScreen from '../SearchScreen';
+import SearchScreen from '../searchscreen/SearchScreen';
 import MyTabs from './MyTabs';
 
 const styles = {

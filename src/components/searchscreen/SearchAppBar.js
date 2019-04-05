@@ -29,6 +29,10 @@ class SearchAppBar extends React.Component {
     }
   }
 
+  getWord = () => {
+      this.props.getWord(this.state.query)
+  }
+
   handleDrawerOpen = () => {
     this.setState({ drawerIsOpen: true });
   };
