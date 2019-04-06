@@ -44,7 +44,8 @@ class SignIn extends React.Component {
             })
         }).then((result) => result.json())
             .then((info) => {
-                localStorage.setItem('jwt', info.token)
+                localStorage.setItem('username', this.state.username) //save username for requests
+                localStorage.setItem('jwt', info.token) //save jwt token for requests
                 this.props.history.replace("/search");
             })
     }

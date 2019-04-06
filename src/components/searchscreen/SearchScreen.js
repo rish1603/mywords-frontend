@@ -1,25 +1,57 @@
 import React from 'react';
 import SearchAppBar from './SearchAppBar';
+import WordCard from './WordCard'
+import RecipeReviewCard from './RecipeReviewCard'
 
 class SearchScreen extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      words: [{
+        word: "",
+        definition: "",
+        lexicalCategory: "",
+        sentences: [""]
+      }]
+    }
     this.getWord = this.getWord.bind(this);
   }
 
-getWord(data) {
-  console.log(data)
-}
+  getWord(data) {
+    console.log(data)
+  }
 
   render() {
+    let props = [{
+      // word: "hi"
+      word: this.state.words[0].word,
+      definition: this.state.words[0].definition,
+      lexicalCategory: this.state.words[0].lexicalCategory,
+      sentences: this.state.words[0].sentences
+    }]
+
     return (
-      <SearchAppBar getWord={this.getWord}/>
+      <div>
+        <SearchAppBar getWord={this.getWord} />
+        <WordCard {...props}></WordCard>
+      </div>
     )
   }
-  componentDidMount() {
-  }
 
+  componentDidMount() {
+    const userName = localStorage.getItem('username')
+    fetch('http://localhost:8080/' + userName + '/myWords/all', {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+      }
+    }).then((result) => result.json())
+      .then((info) => {
+        this.setState({words: info})
+      })
+  }
 }
+
 
 export default SearchScreen;

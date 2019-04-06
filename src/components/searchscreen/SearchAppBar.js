@@ -20,12 +20,12 @@ class SearchAppBar extends React.Component {
       drawerIsOpen: false,
       query: ''
     }
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   _handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       console.log(this.state.query);
+      this.props.getWord(this.state.query)
     }
   }
 
@@ -107,6 +107,7 @@ class SearchAppBar extends React.Component {
 const styles = theme => ({
   root: {
     width: '100%',
+    paddingBottom: '50px'
   },
   grow: {
     flexGrow: 1,

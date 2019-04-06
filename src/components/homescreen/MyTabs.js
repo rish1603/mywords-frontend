@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 class MyTabs extends React.Component {
   render() {
     const selectedTab = this.props.selectedTab;
-    console.log(selectedTab)
     return (
       <Tabs
         value={selectedTab}
