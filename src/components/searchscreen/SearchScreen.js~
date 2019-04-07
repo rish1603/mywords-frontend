@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchAppBar from './SearchAppBar';
 import WordCard from './WordCard'
-import WordCard2 from './WordCard2'
+import RecipeReviewCard from './RecipeReviewCard'
 
 class SearchScreen extends React.Component {
 
@@ -24,19 +24,18 @@ class SearchScreen extends React.Component {
   }
 
   render() {
-    let props = this.state
+    let props = [{
+      // word: "hi"
+      word: this.state.words[0].word,
+      definition: this.state.words[0].definition,
+      lexicalCategory: this.state.words[0].lexicalCategory,
+      sentences: this.state.words[0].sentences
+    }]
 
     return (
       <div>
         <SearchAppBar getWord={this.getWord} />
-        {/* <WordCard {...props}></WordCard>
-        <WordCard2 word={this.state.words[0]}></WordCard2> */}
-
-        {this.state.words.map((data, index) => {
-          return <WordCard2 key={index} word={data}></WordCard2>
-        })}
-
-
+        <WordCard {...props}></WordCard>
       </div>
     )
   }
