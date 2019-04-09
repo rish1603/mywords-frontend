@@ -12,10 +12,6 @@ class Quiz extends React.Component {
             </div>
         )
     }
-
-    componentDidMount() {
-        console.log("hi")
-    }
 }
 
 export default Quiz;

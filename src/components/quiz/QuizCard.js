@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import arrayShuffle from 'array-shuffle';
 import RadioButton from './RadioButton';
 
 class QuizCard extends React.Component {
@@ -12,6 +13,7 @@ class QuizCard extends React.Component {
         super(props);
 
         this.state = {
+            correctWord: "",
             answers: [{
                 word: "",
             }]
@@ -24,8 +26,9 @@ class QuizCard extends React.Component {
         return (
             <Card raised className={classes.card}>
                 <CardContent>
-                    <Typography variant="h5">{this.state.answers[0].word} means...</Typography><br />
-                    <Typography className={classes.definition} variant="body1" component="p">It might be me!</Typography>
+                    <Typography variant="h4">{this.state.correctWord} means...</Typography><br />
+                    {arrayShuffle(this.state.answers).map(i =>
+                    <Typography className={classes.definition} variant="body1" key={i.word}>{i.definition}<RadioButton/></Typography>)}
                 </CardContent>
             </Card>
         );
@@ -39,11 +42,12 @@ class QuizCard extends React.Component {
             }
         }).then((result) => result.json())
             .then((info) => {
-                this.setState(() => ({ answers: info }))
+                this.setState(() => ({ answers: info, correctWord: info[0].word }))
+            }).then(() => {
+                console.log(this.state)
             })
     }
 }
-
 
 const styles = theme => ({
     card: {
@@ -64,6 +68,5 @@ const styles = theme => ({
 QuizCard.propTypes = {
     classes: PropTypes.object.isRequired,
 };
-
 
 export default withStyles(styles)(QuizCard);
