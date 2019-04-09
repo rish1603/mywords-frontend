@@ -10,7 +10,7 @@ import Collapse from '@material-ui/core/Collapse';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 
-class WordCard2 extends React.Component {
+class WordCard extends React.Component {
 
   constructor(props) {
     super(props);
@@ -106,9 +106,9 @@ const styles = theme => ({
   },
 });
 
-WordCard2.propTypes = {
+WordCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
 
-export default withStyles(styles)(WordCard2);
+export default withStyles(styles)(WordCard);

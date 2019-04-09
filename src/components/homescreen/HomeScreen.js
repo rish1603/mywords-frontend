@@ -1,13 +1,11 @@
 import { withStyles } from '@material-ui/core/styles';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { BrowserRouter, Link, Route, Router, Switch, withRouter, Redirect, ProtectedRoute } from "react-router-dom";
 import Register from './Register';
 import SignIn from './SignIn';
 import SearchScreen from '../searchscreen/SearchScreen';
-import MyTabs from './MyTabs';
+import Quiz from '../quiz/Quiz'
 
 const styles = {
   root: {
@@ -32,6 +30,7 @@ class HomeScreen extends React.Component {
             <Switch>
               <Route exact path="/register" component={Register}/>
               <Route exact path="/" component={SignIn} />
+              <Route exact path="/quiz" component={Quiz}/>
               <Route exact path="/search" component={SearchScreen}/>
             </Switch>
         </div>

@@ -26,9 +26,6 @@ class SearchScreen extends React.Component {
     return (
       <div>
         <SearchAppBar getWord={this.getWord} />
-        {/* <WordCard {...props}></WordCard>
-        <WordCard2 word={this.state.words[0]}></WordCard2> */}
-
         {this.state.words.reverse().map((data, index) => {
           return <WordCard key={index} word={data}></WordCard>
         })}

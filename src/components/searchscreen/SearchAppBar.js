@@ -108,8 +108,8 @@ class SearchAppBar extends React.Component {
                 <ListItemText primary="Home" />
                 <ListItemIcon ><HomeIcon/></ListItemIcon>
               </ListItem>
-              <ListItem button component={Link} to="/test">
-                <ListItemText primary="Test" />
+              <ListItem button component={Link} to="/quiz">
+                <ListItemText primary="Quiz" />
                 <ListItemIcon ><TestIcon/></ListItemIcon>
               </ListItem>
               <ListItem button component={Link} to="/">
