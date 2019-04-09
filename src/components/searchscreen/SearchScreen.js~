@@ -42,7 +42,7 @@ class SearchScreen extends React.Component {
 
   componentDidMount() {
     const userName = localStorage.getItem('username')
-    fetch('http://localhost:8080/' + userName + '/myWords/all', {
+    fetch('http://68.183.35.153:8080/' + userName + '/myWords/all', {
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('jwt')
       }

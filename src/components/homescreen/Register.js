@@ -32,15 +32,14 @@ class Register extends React.Component {
     onSubmit(event) {
         event.preventDefault()
 
-        // TODO: handle unauthorized error  and add token support
-        fetch('http://localhost:8080/login', {
+        fetch('http://68.183.35.153:8080/register', {
             method: "POST",
             headers: {
-                'Content-type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+                'Content-type': 'application/json'
             },
             body: JSON.stringify(this.state)
-        })}
+        })
+    }
 
 
     render() {
@@ -56,7 +55,7 @@ class Register extends React.Component {
                 <Typography component="h1" variant="h5">
                     Register
                 </Typography>
-                <form className={classes.form}>
+                <form method="post" className={classes.form} onSubmit={this.onSubmit}>
                     <FormControl margin="normal" required fullWidth>
                         <InputLabel htmlFor="email">Email</InputLabel>
                         <Input id="email" name="email" autoComplete="email"
@@ -64,7 +63,7 @@ class Register extends React.Component {
                     </FormControl>
                     <FormControl margin="normal" required fullWidth>
                         <InputLabel htmlFor="Username">Username</InputLabel>
-                        <Input id="username" name="userName" onChange={this.handleChange}/>
+                        <Input id="username" name="username" onChange={this.handleChange}/>
                     </FormControl>
                     <FormControl margin="normal" required fullWidth>
                         <InputLabel htmlFor="password">Password</InputLabel>

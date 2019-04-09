@@ -13,38 +13,100 @@ class QuizCard extends React.Component {
         super(props);
 
         this.state = {
+            checkpoint: 0,
             correctWord: "",
+            textToDisplay: [""],
             answers: [{
                 word: "",
             }]
         }
+        this.handler = this.handler.bind(this)
+        this.getNextWord = this.getNextWord.bind(this)
+        this.handleNextQuestion = this.handleNextQuestion.bind(this)
     }
 
     render() {
         const { classes } = this.props;
 
-        return (
-            <Card raised className={classes.card}>
-                <CardContent>
-                    <Typography variant="h4">{this.state.correctWord} means...</Typography><br />
-                    {arrayShuffle(this.state.answers).map(i =>
-                    <Typography className={classes.definition} variant="body1" key={i.word}>{i.definition}<RadioButton/></Typography>)}
-                </CardContent>
-            </Card>
-        );
+        console.log(this.state.checkpoint)
+        if (this.state.checkpoint == 0) {
+            return (
+                <Card raised className={classes.card}>
+                    <CardContent>
+                        <Typography variant="h4">{this.state.correctWord}</Typography><br />
+                        {arrayShuffle(this.state.answers).map(i =>
+                            <Typography className={classes.definition} variant="body1" key={i.word}>{i.definition}
+                                <RadioButton handler={this.handler} color={i.color} classses={i.classes} />
+                            </Typography>
+                        )}
+                    </CardContent>
+                </Card>
+            )
+        }
+        else {
+            return (
+                <Card raised className={classes.card}>
+                    <CardContent>
+                        <Typography variant="h4">{this.state.correctWord}</Typography><br />
+                        {arrayShuffle(this.state.answers).map(i =>
+                            <Typography className={classes.definition} variant="body1" key={i.word}>{i.sentence}
+                                <RadioButton handler={this.handler} color={i.color} classses={i.classes} />
+                            </Typography>
+                        )}
+
+                    </CardContent>
+                </Card>
+            )
+        }
+    }
+
+    handler() {
+        if (this.state.checkpoint == 0) {
+            this.setState({ checkpoint: 1 })
+        }
+        else {
+            this.handleNextQuestion()
+        }
+    }
+
+    handleNextQuestion() {
+        const userName = localStorage.getItem('username')
+        fetch('http://68.183.35.153:8080/' + userName + '/myWords/test/markLearnt', {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+            }
+        }).then(() => {
+            this.setState({ checkpoint: 0 })
+        }).then(() => {
+            this.getNextWord()
+        })
     }
 
     componentDidMount() {
+        this.getNextWord()
+    }
+
+    getNextWord() {
         const userName = localStorage.getItem('username')
-        fetch('http://localhost:8080/' + userName + '/myWords/test', {
+        fetch('http://68.183.35.153:8080/' + userName + '/myWords/test', {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('jwt')
             }
         }).then((result) => result.json())
-            .then((info) => {
-                this.setState(() => ({ answers: info, correctWord: info[0].word }))
-            }).then(() => {
-                console.log(this.state)
+            .then((data) => {
+                data.map(i => { i.color = "secondary" })
+                return data
+            }).then((data) => {
+                data[0].color = "primary"
+                data[0].classes = {
+                    colorPrimary: 'classes.colorPrimary',
+                    checked: 'classes.checked',
+                }
+                return data
+            }).then((data) => {
+                this.setState(() => ({ answers: data, correctWord: data[0].word }))
+            }).catch((err) => {
+                console.log(err)
             })
     }
 }

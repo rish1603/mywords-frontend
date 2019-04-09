@@ -15,7 +15,6 @@ class SearchScreen extends React.Component {
         sentences: [""]
       }]
     }
-    // If you are going to bind your functions you need to bind them all I think xd
     this.getWord = this.getWord.bind(this);
     this.getUserWords = this.getUserWords.bind(this)
   }
@@ -34,25 +33,37 @@ class SearchScreen extends React.Component {
   }
 
   getWord(word) {
-    const userName = localStorage.getItem('username')
-    fetch('http://localhost:8080/' + userName + '/' + word, {
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('jwt')
-      }
-    }).then(() => {this.getUserWords()})
+
+    if (this.state.words.map(i => i.word).some(i => i == word)) {
+      return console.log("word already searched")
+    }
+
+    else {
+      const userName = localStorage.getItem('username')
+      fetch('http://68.183.35.153:8080/' + userName + '/' + word, {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+        }
+      }).then((data) => {
+        console.log(data)
+        this.getUserWords()
+      })
+    }
   }
 
   // Returns all user words
   getUserWords() {
     const userName = localStorage.getItem('username')
-    fetch('http://localhost:8080/' + userName + '/myWords/all', {
+    fetch('http://68.183.35.153:8080/' + userName + '/myWords/all', {
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('jwt')
       }
     }).then((result) => result.json())
       .then((info) => {
-      	// Set states takes a function 
+        console.log(info)
         this.setState(() => ({ words: info }))
+      }).catch((err) => {
+        console.log(err)
       })
   }
 

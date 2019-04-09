@@ -32,7 +32,7 @@ class SignIn extends React.Component {
         event.preventDefault()
 
         // TODO: handle unauthorized error  and add token support
-        fetch('http://localhost:8080/login', {
+        fetch('http://68.183.35.153:8080/login', {
             method: "POST",
             headers: {
                 'Content-type': 'application/json',
@@ -44,7 +44,7 @@ class SignIn extends React.Component {
                 localStorage.setItem('username', this.state.username) //save username for requests
                 localStorage.setItem('jwt', info.token) //save jwt token for requests
                 this.props.history.replace("/search");
-            })
+            }).catch((err) => console.log(err))
     }
 
     render() {
