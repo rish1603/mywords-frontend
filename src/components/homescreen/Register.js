@@ -20,16 +20,30 @@ class Register extends React.Component {
         super(props);
         this.state = {
             email: '',
-            userName: '',
+            username: '',
             password: '',
             password2: '',
         }
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
     }
 
     handleChange(event) {
             this.setState({ [event.target.name]: event.target.value });
     }
+
+    onSubmit(event) {
+        event.preventDefault()
+
+        // TODO: handle unauthorized error  and add token support
+        fetch('http://localhost:8080/login', {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+            },
+            body: JSON.stringify(this.state)
+        })}
 
 
     render() {

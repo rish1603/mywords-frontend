@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 import Drawer from '@material-ui/core/SwipeableDrawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,6 +12,13 @@ import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import SearchIcon from '@material-ui/icons/Search';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import HomeIcon from '@material-ui/icons/Home';
+import LogOutIcon from '@material-ui/icons/ExitToApp'
+import TestIcon from '@material-ui/icons/Assignment'
 
 class SearchAppBar extends React.Component {
 
@@ -24,13 +32,12 @@ class SearchAppBar extends React.Component {
 
   _handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      console.log(this.state.query);
       this.props.getWord(this.state.query)
     }
   }
 
   getWord = () => {
-      this.props.getWord(this.state.query)
+    this.props.getWord(this.state.query)
   }
 
   handleDrawerOpen = () => {
@@ -52,7 +59,7 @@ class SearchAppBar extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <IconButton className={classes.menuButton}
               color="inherit"
@@ -96,7 +103,20 @@ class SearchAppBar extends React.Component {
             </IconButton>
           </div>
           <div className={classes.drawerInner}>
-            <p>drawer contentasifbasifubasifubasiyufbasf</p>
+            <List>
+              <ListItem button component={Link} to="/search">
+                <ListItemText primary="Home" />
+                <ListItemIcon ><HomeIcon/></ListItemIcon>
+              </ListItem>
+              <ListItem button component={Link} to="/test">
+                <ListItemText primary="Test" />
+                <ListItemIcon ><TestIcon/></ListItemIcon>
+              </ListItem>
+              <ListItem button component={Link} to="/">
+                <ListItemText primary="Sign out" />
+                <ListItemIcon ><LogOutIcon/></ListItemIcon>
+              </ListItem>
+            </List>
           </div>
         </Drawer>
       </div>
@@ -107,7 +127,7 @@ class SearchAppBar extends React.Component {
 const styles = theme => ({
   root: {
     width: '100%',
-    paddingBottom: '50px'
+    paddingBottom: '100px',
   },
   grow: {
     flexGrow: 1,

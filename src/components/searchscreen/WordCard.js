@@ -10,7 +10,7 @@ import Collapse from '@material-ui/core/Collapse';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 
-class WordCard extends React.Component {
+class WordCard2 extends React.Component {
 
   constructor(props) {
     super(props);
@@ -32,7 +32,7 @@ class WordCard extends React.Component {
       for (let i = 1; i < 5; i++) {
         sentenceList.push(
           <Typography paragraph key={i} variant="body1" className={classes.sentences}>
-            {this.props.words[0].sentences[i]}<br/>
+            {this.props.word.sentences[i]}<br/>
           </Typography>
         )
       }
@@ -42,9 +42,9 @@ class WordCard extends React.Component {
     return (
       <Card raised className={classes.card}>
         <CardContent>
-          <Typography variant="h3"> {this.props.words[0].word} </Typography><br />
-          <Typography variant="subtitle1" color="textSecondary"> {this.props.words[0].lexicalCategory} </Typography> <br />
-          <Typography className={classes.definition} variant="body1" component="p">{this.props.words[0].definition}</Typography>
+          <Typography variant="h3"> {this.props.word.word} </Typography><br />
+          <Typography variant="subtitle1" color="textSecondary"> {this.props.word.lexicalCategory} </Typography> <br />
+          <Typography className={classes.definition} variant="body1" component="p">{this.props.word.definition}</Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>
           <IconButton
@@ -73,10 +73,11 @@ const styles = theme => ({
     minWidth: 275,
     maxWidth: 350,
     minHeight: 300,
-    maxHeight: 600,
+    maxHeight: 700,
     display: 'block',
     marginLeft: 'auto',
-    marginRight: 'auto'
+    marginRight: 'auto',
+    marginBottom: '50px'
   },
   title: {
     fontSize: 14,
@@ -105,9 +106,9 @@ const styles = theme => ({
   },
 });
 
-WordCard.propTypes = {
+WordCard2.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
 
-export default withStyles(styles)(WordCard);
+export default withStyles(styles)(WordCard2);

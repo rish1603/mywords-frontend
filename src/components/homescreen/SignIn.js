@@ -38,10 +38,7 @@ class SignIn extends React.Component {
                 'Content-type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('jwt')
             },
-            body: JSON.stringify({
-                username: this.state.username,
-                password: this.state.password
-            })
+            body: JSON.stringify(this.state)
         }).then((result) => result.json())
             .then((info) => {
                 localStorage.setItem('username', this.state.username) //save username for requests
