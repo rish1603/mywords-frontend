@@ -32,6 +32,9 @@ class RadioButton extends React.Component {
     if(this.props.color == "primary") {
       sleep(1000).then(() => this.setState({selectedValue: ''}, () => this.props.handler()))
     }
+    else {
+      sleep(1000).then(() => this.setState({ selectedValue: '' }))
+    }
   };
 
 
